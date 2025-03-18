@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/wellbee/static/css/main.f855e6bc.css",
+    "main.js": "/wellbee/static/js/main.cff19360.js",
+    "static/js/453.b2fdd4eb.chunk.js": "/wellbee/static/js/453.b2fdd4eb.chunk.js",
+    "static/media/logo.svg": "/wellbee/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/wellbee/index.html",
+    "main.f855e6bc.css.map": "/wellbee/static/css/main.f855e6bc.css.map",
+    "main.cff19360.js.map": "/wellbee/static/js/main.cff19360.js.map",
+    "453.b2fdd4eb.chunk.js.map": "/wellbee/static/js/453.b2fdd4eb.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.cff19360.js"
+  ]
+}
