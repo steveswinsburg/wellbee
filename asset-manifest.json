@@ -1,13 +1,14 @@
 {
   "files": {
-    "main.css": "/wellbee/static/css/main.79d19d76.css",
-    "main.js": "/wellbee/static/js/main.ab64dbc4.js",
-    "index.html": "/wellbee/index.html",
-    "main.79d19d76.css.map": "/wellbee/static/css/main.79d19d76.css.map",
-    "main.ab64dbc4.js.map": "/wellbee/static/js/main.ab64dbc4.js.map"
+    "main.css": "/static/css/main.79d19d76.css",
+    "main.js": "/static/js/main.19de2ec4.js",
+    "static/media/wellbee-logo.png": "/static/media/wellbee-logo.6463e356279847769bfa.png",
+    "index.html": "/index.html",
+    "main.79d19d76.css.map": "/static/css/main.79d19d76.css.map",
+    "main.19de2ec4.js.map": "/static/js/main.19de2ec4.js.map"
   },
   "entrypoints": [
     "static/css/main.79d19d76.css",
-    "static/js/main.ab64dbc4.js"
+    "static/js/main.19de2ec4.js"
   ]
 }
