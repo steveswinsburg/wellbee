@@ -52,4 +52,55 @@ export const sortData = (data, key, ascending) => {
       if (valA > valB) return ascending ? 1 : -1;
       return 0;
     });
-  };
+};
+
+export const parseSummaryBundle = (bundle) => {
+    if (!bundle || bundle.resourceType !== "Bundle" || !Array.isArray(bundle.entry)) {
+      return { error: "Invalid summary format", summary: null };
+    }
+  
+    let patient = null;
+    let medications = [];
+    let allergies = [];
+    let conditions = [];
+    let immunizations = [];
+  
+    // Find the Composition resource
+    const composition = bundle.entry.find((e) => e.resource.resourceType === "Composition")?.resource;
+    if (!composition) {
+      return { error: "No Composition found in summary", summary: null };
+    }
+  
+    // Extract patient reference
+    const patientRef = composition.subject?.reference;
+    if (patientRef) {
+      patient = bundle.entry.find((e) => e.fullUrl.includes(patientRef))?.resource || null;
+    }
+  
+    // Extract sections from Composition
+    composition.section.forEach((section) => {
+      const title = section.title;
+      const text = section.text?.div?.replace(/<[^>]+>/g, "").trim() || "No details available";
+  
+      if (title.includes("Medication")) {
+        medications.push(text);
+      } else if (title.includes("Allergies")) {
+        allergies.push(text);
+      } else if (title.includes("Problems") || title.includes("Conditions")) {
+        conditions.push(text);
+      } else if (title.includes("Immunizations")) {
+        immunizations.push(text);
+      }
+    });
+  
+    return {
+      summary: {
+        patient,
+        medications,
+        allergies,
+        conditions,
+        immunizations,
+      },
+      error: null,
+    };
+};

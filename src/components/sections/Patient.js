@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Card } from "react-bootstrap";
+import { Alert, Card, Spinner } from "react-bootstrap";
 import { fetchPatient } from "../../services/fhirService";
 
 function Patient({ patientId }) {
@@ -34,7 +34,7 @@ function Patient({ patientId }) {
   return (
     <>
       <h4>Patient</h4>
-      {loading && <p>Loading patient details...</p>}
+      {loading && <Spinner animation="border" />}
       {error && <Alert variant="danger">{error}</Alert>}
       {patient && (
         <Card className="p-3">

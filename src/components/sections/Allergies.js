@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Alert, OverlayTrigger, Popover } from "react-bootstrap";
+import { Table, Alert, OverlayTrigger, Popover, Spinner } from "react-bootstrap";
 import { fetchAllergiesForPatient } from "../../services/fhirService";
 import { sortData } from "../../services/fhirUtils";
 
@@ -45,7 +45,7 @@ function Allergies({ patientId }) {
   return (
     <>
       <h4>Allergies</h4>
-      {loading && <p>Loading allergies...</p>}
+      {loading && <Spinner animation="border" />}
       {error && <Alert variant="danger">{error}</Alert>}
       {allergies.length > 0 && (
         <Table striped bordered hover>

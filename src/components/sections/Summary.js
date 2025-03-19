@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Card } from "react-bootstrap";
+import { Alert, Card, Spinner } from "react-bootstrap";
 import { fetchPatientSummary } from "../../services/fhirService";
+import { parseSummaryBundle } from "../../services/fhirUtils";
 
 function Summary({ patientId }) {
   const [summary, setSummary] = useState(null);
@@ -9,7 +10,7 @@ function Summary({ patientId }) {
 
   useEffect(() => {
     if (!patientId) {
-      setError("No patient selected.");
+      setError("No patient in context.");
       return;
     }
     loadSummary();
@@ -20,47 +21,83 @@ function Summary({ patientId }) {
     const { data, error } = await fetchPatientSummary(patientId);
 
     if (error) {
-      setError(error);
-    }
+        setError(error);
+        setLoading(false);
+        return;
+    } 
 
-    if (!data) {
+    const { summary, error: parseError } = parseSummaryBundle(data);
+    if (parseError) {
+      setError(parseError);
+      setLoading(false);
+      return;
+    } 
+
+    if (!summary) {
       setError("No summary available for this patient.");
     }
 
-    setSummary(data);
+    setSummary(summary);
     setLoading(false);
   };
 
   return (
     <>
       <h4>Patient Summary</h4>
-      {loading && <p>Loading summary...</p>}
+      {loading && <Spinner animation="border" />}
       {error && <Alert variant="danger">{error}</Alert>}
       {summary && (
-        <Card className="p-3">
-          <h5>Basic Information</h5>
-          <p><strong>Name:</strong> {summary.name?.[0]?.text || "Unknown"}</p>
-          <p><strong>Gender:</strong> {summary.gender || "Unknown"}</p>
-          <p><strong>DOB:</strong> {summary.birthDate || "Unknown"}</p>
+        <>
+          {/* Patient Info */}
+          <Card className="mb-3">
+            <Card.Body>
+              <h5>Patient Details</h5>
+              <p><strong>Name:</strong> {summary.patient?.name?.[0]?.family}, {summary.patient?.name?.[0]?.given?.join(" ") || ""}</p>
+              <p><strong>Gender:</strong> {summary.patient?.gender || "Unknown"}</p>
+              <p><strong>Date of Birth:</strong> {summary.patient?.birthDate || "Unknown"}</p>
+            </Card.Body>
+          </Card>
 
-          <h5>Clinical Summary</h5>
-          <p><strong>Conditions:</strong> {summary.conditions || "N/A"}</p>
-          <p><strong>Allergies:</strong> {summary.allergies || "N/A"}</p>
-          <p><strong>Medications:</strong> {summary.medications || "N/A"}</p>
+          {/* Medications */}
+          <Card className="mb-3">
+            <Card.Body>
+              <h5>Medications</h5>
+              <ul>
+                {summary.medications.length > 0 ? summary.medications.map((m, idx) => <li key={idx}>{m}</li>) : <p>No medications recorded.</p>}
+              </ul>
+            </Card.Body>
+          </Card>
 
-          <h5>Encounters</h5>
-          {summary.encounters?.length > 0 ? (
-            <ul>
-              {summary.encounters.map((enc, index) => (
-                <li key={index}>
-                  {enc.class?.display || "Unknown"} - {enc.period?.start || "N/A"}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>No past encounters</p>
-          )}
-        </Card>
+          {/* Allergies */}
+          <Card className="mb-3">
+            <Card.Body>
+              <h5>Allergies</h5>
+              <ul>
+                {summary.allergies.length > 0 ? summary.allergies.map((a, idx) => <li key={idx}>{a}</li>) : <p>No allergies recorded.</p>}
+              </ul>
+            </Card.Body>
+          </Card>
+
+          {/* Problems (Conditions) */}
+          <Card className="mb-3">
+            <Card.Body>
+              <h5>Problems & Conditions</h5>
+              <ul>
+                {summary.conditions.length > 0 ? summary.conditions.map((c, idx) => <li key={idx}>{c}</li>) : <p>No conditions recorded.</p>}
+              </ul>
+            </Card.Body>
+          </Card>
+
+          {/* Immunizations */}
+          <Card className="mb-3">
+            <Card.Body>
+              <h5>Immunizations</h5>
+              <ul>
+                {summary.immunizations.length > 0 ? summary.immunizations.map((i, idx) => <li key={idx}>{i}</li>) : <p>No immunizations recorded.</p>}
+              </ul>
+            </Card.Body>
+          </Card>
+        </>
       )}
     </>
   );
