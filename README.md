@@ -13,6 +13,12 @@ npm start
 npm run build
 ```
 
+Then serve:
+```
+npm install -g serve
+serve -s build
+```
+
 
 ## Deploy to Github Pages
 

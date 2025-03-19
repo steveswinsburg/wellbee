@@ -22,7 +22,7 @@ function Home() {
           Welcome to the FHIR App! Click the cog icon to configure the server.
         </Alert>
       ) : (
-        <PatientPicker fhirBaseUrl={fhirBaseUrl} />
+        <PatientPicker />
       )}
     </Container>
   );

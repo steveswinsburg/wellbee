@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Table, Alert } from "react-bootstrap";
+import { Table, Alert, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { fetchPatients } from "../services/fhirService";
-import { formatFullName, getInitials, sortPatientsByLastName } from "../services/fhirUtils";
+import { sortPatientsByLastName } from "../services/fhirUtils";
 
-function PatientPicker({ fhirBaseUrl }) {
+function PatientPicker() {
   const [patients, setPatients] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -12,30 +12,32 @@ function PatientPicker({ fhirBaseUrl }) {
 
   useEffect(() => {
     loadPatients();
-  }, [fhirBaseUrl]);
+  }, []);
 
   const loadPatients = async () => {
     setLoading(true);
-    const { patients, error } = await fetchPatients(fhirBaseUrl);
-    setPatients(sortPatientsByLastName(patients));
+    const { data, error } = await fetchPatients();
+    
+    setPatients(sortPatientsByLastName(data));
     setError(error);
     setLoading(false);
   };
 
-  const handlePatientSelect = (patient) => {
-    localStorage.setItem("selectedPatient", JSON.stringify(patient));
+  const setPatientInContext = (patient) => {
+    localStorage.setItem("patientInContext", JSON.stringify(patient));
     navigate("/dashboard"); // Navigate to dashboard
   };
 
   return (
     <>
-      <h4>Patient Picker</h4>
-      {loading && <p>Loading patients...</p>}
+      <h4>Select a Patient</h4>
+      {loading && <Spinner animation="border" />}
       {error && <Alert variant="danger">{error}</Alert>}
       {patients.length > 0 && (
         <Table striped bordered hover>
           <thead>
             <tr>
+              <th>ID</th>
               <th>Name</th>
               <th>Gender</th>
               <th>Date of Birth</th>
@@ -43,10 +45,13 @@ function PatientPicker({ fhirBaseUrl }) {
           </thead>
           <tbody>
             {patients.map((patient) => (
-              <tr key={patient.id} onClick={() => handlePatientSelect(patient)} style={{ cursor: "pointer" }}>
-                <td>{formatFullName(patient.givenNames, patient.familyName)}</td>
-                <td>{patient.gender}</td>
-                <td>{patient.birthDate}</td>
+              <tr key={patient.id} onClick={() => setPatientInContext(patient)} style={{ cursor: "pointer" }}>
+                <td>{patient.id}</td>
+                <td>
+                  {patient.name?.[0]?.family}, {patient.name?.[0]?.given?.join(" ") || ""}
+                </td>
+                <td>{patient.gender || "Unknown"}</td>
+                <td>{patient.birthDate || "Unknown"}</td>
               </tr>
             ))}
           </tbody>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Alert } from "react-bootstrap";
+import { Table, Alert, OverlayTrigger, Popover } from "react-bootstrap";
 import { fetchAllergiesForPatient } from "../../services/fhirService";
 import { sortData } from "../../services/fhirUtils";
 
@@ -7,11 +7,11 @@ function Allergies({ patientId }) {
   const [allergies, setAllergies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [sortConfig, setSortConfig] = useState({ key: "substance", ascending: true });
+  const [sortConfig, setSortConfig] = useState({ key: "code.text", ascending: true });
 
   useEffect(() => {
     if (!patientId) {
-      setError("No patient selected.");
+      setError("No patient in context.");
       return;
     }
     loadAllergies();
@@ -25,8 +25,8 @@ function Allergies({ patientId }) {
       setError(error);
     }
 
-    if (data.length === 0) {
-      setError("No allergies found for this patient.");
+    if (!data || data.length === 0) {
+      setError("No allergies found.");
     }
 
     setAllergies(data);
@@ -47,23 +47,44 @@ function Allergies({ patientId }) {
       <h4>Allergies</h4>
       {loading && <p>Loading allergies...</p>}
       {error && <Alert variant="danger">{error}</Alert>}
-      {!loading && !error && allergies.length === 0 && <p>No allergies available.</p>}
       {allergies.length > 0 && (
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th onClick={() => handleSort("substance")} style={{ cursor: "pointer" }}>Substance</th>
-              <th onClick={() => handleSort("status")} style={{ cursor: "pointer" }}>Status</th>
-              <th onClick={() => handleSort("severity")} style={{ cursor: "pointer" }}>Severity</th>
+              <th onClick={() => handleSort("code.text")} style={{ cursor: "pointer" }}>
+                Substance
+              </th>
+              <th onClick={() => handleSort("reaction[0].manifestation[0].text")} style={{ cursor: "pointer" }}>
+                Reaction
+              </th>
+              <th onClick={() => handleSort("reaction[0].severity")} style={{ cursor: "pointer" }}>
+                Severity
+              </th>
             </tr>
           </thead>
           <tbody>
             {sortedAllergies.map((allergy) => (
-              <tr key={allergy.id}>
-                <td>{allergy.substance}</td>
-                <td>{allergy.status}</td>
-                <td>{allergy.severity}</td>
-              </tr>
+              <OverlayTrigger
+                key={allergy.id}
+                trigger="click"
+                placement="right"
+                overlay={
+                  <Popover>
+                    <Popover.Header as="h3">Allergy Details</Popover.Header>
+                    <Popover.Body>
+                      <pre style={{ fontSize: "0.75em", whiteSpace: "pre-wrap" }}>
+                        {JSON.stringify(allergy, null, 2)}
+                      </pre>
+                    </Popover.Body>
+                  </Popover>
+                }
+              >
+                <tr style={{ cursor: "pointer" }}>
+                  <td>{allergy.code?.text || "Unknown"}</td>
+                  <td>{allergy.reaction?.[0]?.manifestation?.[0]?.text || "Unknown"}</td>
+                  <td>{allergy.reaction?.[0]?.severity || "Unknown"}</td>
+                </tr>
+              </OverlayTrigger>
             ))}
           </tbody>
         </Table>

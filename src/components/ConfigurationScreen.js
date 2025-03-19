@@ -10,7 +10,10 @@ function ConfigurationScreen() {
   const [fhirBaseUrl, setFhirBaseUrl] = useState(localStorage.getItem("fhirBaseUrl") || DEFAULT_FHIR_URL);
 
   const handleSave = () => {
-    localStorage.setItem("fhirBaseUrl", fhirBaseUrl);
+
+    // save base URL
+    let cleanedUrl = fhirBaseUrl.trim().replace(/\/+$/, "");
+    localStorage.setItem("fhirBaseUrl", cleanedUrl);
     navigate(-1); // Go back
   };
 

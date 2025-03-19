@@ -1,22 +1,28 @@
 import React from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { formatFullName } from "../services/fhirUtils";
+import { Card, Button } from "react-bootstrap";
 
 function PatientHeader({ patient, onClose }) {
-  if (!patient) return null;
+  if (!patient) {
+    return <h4>No patient selected.</h4>;
+  }
 
   return (
-    <Container className="p-3 border-bottom">
-      <Row>
-        <Col>
-          <h3>{formatFullName(patient.givenNames, patient.familyName)}</h3>
-          <p>Gender: {patient.gender} | DOB: {patient.birthDate}</p>
-        </Col>
-        <Col className="text-end">
+    <Card className="mb-3">
+      <Card.Body>
+        <div className="d-flex justify-content-between align-items-center">
+          <div>
+            <h4>
+              {patient.name?.[0]?.family}, {patient.name?.[0]?.given?.join(" ") || ""}
+            </h4>
+            <p>
+              <strong>ID:</strong> {patient.id} | <strong>Gender:</strong> {patient.gender || "Unknown"} |{" "}
+              <strong>DOB:</strong> {patient.birthDate || "Unknown"}
+            </p>
+          </div>
           <Button variant="danger" onClick={onClose}>Close Patient</Button>
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </Card.Body>
+    </Card>
   );
 }
 

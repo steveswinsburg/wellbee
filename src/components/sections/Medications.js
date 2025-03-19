@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Alert } from "react-bootstrap";
+import { Table, Alert, OverlayTrigger, Popover } from "react-bootstrap";
 import { fetchMedicationsForPatient } from "../../services/fhirService";
 import { sortData } from "../../services/fhirUtils";
 
@@ -7,11 +7,11 @@ function Medications({ patientId }) {
   const [medications, setMedications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [sortConfig, setSortConfig] = useState({ key: "name", ascending: true });
+  const [sortConfig, setSortConfig] = useState({ key: "medicationCodeableConcept.text", ascending: true });
 
   useEffect(() => {
     if (!patientId) {
-      setError("No patient selected.");
+      setError("No patient in context.");
       return;
     }
     loadMedications();
@@ -25,8 +25,8 @@ function Medications({ patientId }) {
       setError(error);
     }
 
-    if (data.length === 0) {
-      setError("No medications found for this patient.");
+    if (!data || data.length === 0) {
+      setError("No medications found.");
     }
 
     setMedications(data);
@@ -47,25 +47,44 @@ function Medications({ patientId }) {
       <h4>Medications</h4>
       {loading && <p>Loading medications...</p>}
       {error && <Alert variant="danger">{error}</Alert>}
-      {!loading && !error && medications.length === 0 && <p>No medications available.</p>}
       {medications.length > 0 && (
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th onClick={() => handleSort("name")} style={{ cursor: "pointer" }}>Name</th>
-              <th onClick={() => handleSort("status")} style={{ cursor: "pointer" }}>Status</th>
-              <th onClick={() => handleSort("type")} style={{ cursor: "pointer" }}>Type</th>
-              <th onClick={() => handleSort("date")} style={{ cursor: "pointer" }}>Date</th>
+              <th onClick={() => handleSort("medicationCodeableConcept.text")} style={{ cursor: "pointer" }}>
+                Name
+              </th>
+              <th onClick={() => handleSort("status")} style={{ cursor: "pointer" }}>
+                Status
+              </th>
+              <th onClick={() => handleSort("resourceType")} style={{ cursor: "pointer" }}>
+                Type
+              </th>
             </tr>
           </thead>
           <tbody>
             {sortedMedications.map((med) => (
-              <tr key={med.id}>
-                <td>{med.name}</td>
-                <td>{med.status}</td>
-                <td>{med.type}</td>
-                <td>{med.date}</td>
-              </tr>
+              <OverlayTrigger
+                key={med.id}
+                trigger="click"
+                placement="right"
+                overlay={
+                  <Popover>
+                    <Popover.Header as="h3">Medication Details</Popover.Header>
+                    <Popover.Body>
+                      <pre style={{ fontSize: "0.75em", whiteSpace: "pre-wrap" }}>
+                        {JSON.stringify(med, null, 2)}
+                      </pre>
+                    </Popover.Body>
+                  </Popover>
+                }
+              >
+                <tr style={{ cursor: "pointer" }}>
+                  <td>{med.medicationCodeableConcept?.text || "Unknown"}</td>
+                  <td>{med.status || "Unknown"}</td>
+                  <td>{med.resourceType}</td>
+                </tr>
+              </OverlayTrigger>
             ))}
           </tbody>
         </Table>

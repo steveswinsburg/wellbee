@@ -27,8 +27,14 @@ export const getInitials = (givenNames, familyName) => {
  * @returns {Array} Sorted patients.
  */
 export const sortPatientsByLastName = (patients) => {
-    return patients.sort((a, b) => (a.familyName || "").localeCompare(b.familyName || "", undefined, { sensitivity: "base" }));
-};
+    if (!Array.isArray(patients)) return []; 
+  
+    return patients.sort((a, b) => {
+      const lastNameA = a.name?.[0]?.family?.toLowerCase() || "";
+      const lastNameB = b.name?.[0]?.family?.toLowerCase() || "";
+      return lastNameA.localeCompare(lastNameB);
+    });
+  };
 
 /**
  * Generic sorting function for table data.
