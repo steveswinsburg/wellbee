@@ -18,7 +18,7 @@ function ConfigurationScreen() {
   };
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-3">
       <NavbarHeader title="Configuration">
         <Button variant="link" onClick={() => navigate(-1)}>Back</Button>
       </NavbarHeader>

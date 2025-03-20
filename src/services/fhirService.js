@@ -159,3 +159,20 @@ export const fetchPatient = async (patientId) => {
         return { data: null, error: err.message };
     }
 };
+
+export const fetchEncountersForPatient = async (patientId) => {
+    try {
+      const fhirBaseUrl = localStorage.getItem("fhirBaseUrl");
+      if (!fhirBaseUrl) throw new Error("FHIR server is not configured.");
+  
+      const response = await fetch(`${fhirBaseUrl}/Encounter?patient=${patientId}`);
+      if (!response.ok) throw new Error("Failed to fetch encounters.");
+      
+      const data = await response.json();
+      const encounters = (data.entry || []).map(entry => entry.resource);
+  
+      return { data: encounters, error: null };
+    } catch (err) {
+      return { data: [], error: err.message };
+    }
+  };

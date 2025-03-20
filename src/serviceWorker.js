@@ -36,3 +36,32 @@ self.addEventListener("activate", (event) => {
     })
   );
 });
+
+// Register function to be used in index.js
+export function register() {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/serviceWorker.js").then(
+          (registration) => {
+            console.log("Service Worker registered with scope:", registration.scope);
+          },
+          (err) => {
+            console.log("Service Worker registration failed:", err);
+          }
+        );
+      });
+    }
+  }
+  
+  // Unregister function (if needed)
+  export function unregister() {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.ready
+        .then((registration) => {
+          registration.unregister();
+        })
+        .catch((error) => {
+          console.error("Error unregistering service worker:", error);
+        });
+    }
+  }

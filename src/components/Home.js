@@ -9,7 +9,7 @@ function Home() {
   const [fhirBaseUrl] = useState(localStorage.getItem("fhirBaseUrl") || "");
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-3">
       
       <NavbarHeader>
         <Link to="/config">

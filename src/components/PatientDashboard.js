@@ -9,6 +9,7 @@ import Conditions from "./sections/Conditions";
 import Immunizations from "./sections/Immunizations";
 import Summary from "./sections/Summary";
 import Patient from "./sections/Patient";
+import Encounters from "./sections/Encounters";
 
 
 function PatientDashboard() {
@@ -48,8 +49,9 @@ function PatientDashboard() {
     if (activeSection === "Immunizations") return <Immunizations patientId={patient?.id} />;
     if (activeSection === "Patient") return <Patient patientId={patient?.id} />;
     if (activeSection === "Summary") return <Summary patientId={patient?.id} />;
+    if (activeSection === "Encounters") return <Encounters patientId={patient?.id} />;
 
-    return <h4>Select a section from the left.</h4>;
+    //return <h4>Select a section from the left.</h4>;
   };
 
   if (loading) {
@@ -62,7 +64,7 @@ function PatientDashboard() {
 
   if (error) {
     return (
-      <Container className="mt-5">
+      <Container className="mt-3">
         <Alert variant="danger">{error}</Alert>
       </Container>
     );

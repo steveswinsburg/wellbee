@@ -1,15 +1,11 @@
 import React from "react";
 import { ListGroup, Image } from "react-bootstrap";
-import { Capsule, ExclamationTriangle, ClipboardHeart, ShieldCheck, FileEarmarkText, PersonBadge } from "react-bootstrap-icons";
-import wellbeeLogo from "../assets/wellbee-logo.png";
+import { Capsule, ExclamationTriangle, ClipboardHeart, ShieldCheck, FileEarmarkText, PersonBadge, CalendarEvent } from "react-bootstrap-icons";
 
 function SidebarNav({ activeSection, setActiveSection }) {
   return (
-    <div className="d-flex flex-column align-items-center p-3" style={{ width: "250px", minHeight: "100vh", background: "#f8f9fa" }}>
-      {/* Wellbee Logo */}
-      <Image src={wellbeeLogo} width="120" height="120" className="mb-3" alt="Wellbee Logo" />
+    <div className="d-flex flex-column align-items-center p-3 mt-4" style={{ width: "250px", minHeight: "100vh", background: "#f8f9fa" }}>
 
-      {/* Sidebar Menu */}
       <ListGroup variant="flush" className="w-100">
         
         <ListGroup.Item 
@@ -51,6 +47,15 @@ function SidebarNav({ activeSection, setActiveSection }) {
           onClick={() => setActiveSection("Immunizations")}
         >
           <ShieldCheck /> Immunizations
+        </ListGroup.Item>
+
+        <ListGroup.Item 
+          action 
+          className="list-group-item" 
+          active={activeSection === "Encounters"} 
+          onClick={() => setActiveSection("Encounters")}
+        >
+          <CalendarEvent /> Encounters
         </ListGroup.Item>
 
         <ListGroup.Item 
