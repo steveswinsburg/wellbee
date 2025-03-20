@@ -104,3 +104,32 @@ export const parseSummaryBundle = (bundle) => {
       error: null,
     };
 };
+
+export const extractMedicationName = (medicationResource) => {
+    if (!medicationResource) return "Unknown";
+  
+    // Case 1: If medication is a CodeableConcept, get text
+    if (medicationResource.medicationCodeableConcept?.text) {
+      return medicationResource.medicationCodeableConcept.text;
+    }
+
+    // Case 2: If medication is a CodeableConcept, get coding display
+    if (medicationResource.medicationCodeableConcept?.coding?.length > 0) {
+        const codingDisplay = medicationResource.medicationCodeableConcept.coding.find(
+          (coding) => coding.display
+        )?.display;
+        if (codingDisplay) return codingDisplay;
+    }
+  
+    // Case 3: If medication is in a contained Medication resource
+    if (medicationResource.medicationReference?.reference?.startsWith("#")) {
+      const containedMedication = medicationResource.contained?.find(
+        (med) => `#${med.id}` === medicationResource.medicationReference.reference
+      );
+      if (containedMedication?.code?.text) {
+        return containedMedication.code.text;
+      }
+    }
+  
+    return "Unknown";
+  };

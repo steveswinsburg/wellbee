@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table, Alert, OverlayTrigger, Popover, Spinner } from "react-bootstrap";
 import { fetchMedicationsForPatient } from "../../services/fhirService";
-import { sortData } from "../../services/fhirUtils";
+import { extractMedicationName, sortData } from "../../services/fhirUtils";
 
 function Medications({ patientId }) {
   const [medications, setMedications] = useState([]);
@@ -40,7 +40,14 @@ function Medications({ patientId }) {
     }));
   };
 
-  const sortedMedications = sortData(medications, sortConfig.key, sortConfig.ascending);
+  const sortedMedications = sortData(
+    medications.map((med) => ({
+      ...med,
+      medicationName: extractMedicationName(med), // Extract name dynamically
+    })),
+    sortConfig.key,
+    sortConfig.ascending
+  );
 
   return (
     <>
@@ -80,7 +87,7 @@ function Medications({ patientId }) {
                 }
               >
                 <tr style={{ cursor: "pointer" }}>
-                  <td>{med.medicationCodeableConcept?.text || "Unknown"}</td>
+                  <td>{med.medicationName || "Unknown"}</td>
                   <td>{med.status || "Unknown"}</td>
                   <td>{med.resourceType}</td>
                 </tr>

@@ -1,10 +1,13 @@
 import React from "react";
 import { ListGroup, Image } from "react-bootstrap";
 import { Capsule, ExclamationTriangle, ClipboardHeart, ShieldCheck, FileEarmarkText, PersonBadge, CalendarEvent } from "react-bootstrap-icons";
+import wellbeeLogo from "../assets/wellbee-logo.png";
 
 function SidebarNav({ activeSection, setActiveSection }) {
   return (
-    <div className="d-flex flex-column align-items-center p-3 mt-4" style={{ width: "250px", minHeight: "100vh", background: "#f8f9fa" }}>
+    <div className="d-flex flex-column align-items-center p-3" style={{ width: "250px", minHeight: "100vh", background: "#f8f9fa" }}>
+
+    <Image src={wellbeeLogo} width="120" height="120" className="mb-3" alt="Wellbee Logo" />
 
       <ListGroup variant="flush" className="w-100">
         
