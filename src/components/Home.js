@@ -19,7 +19,7 @@ function Home() {
 
       {!fhirBaseUrl ? (
         <Alert variant="warning">
-          Welcome to the FHIR App! Click the cog icon to configure the server.
+          Welcome to Wellbee! Click the cog to get started.
         </Alert>
       ) : (
         <PatientPicker />
