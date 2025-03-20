@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table, Alert, OverlayTrigger, Popover, Spinner } from "react-bootstrap";
 import { fetchAllergiesForPatient } from "../../services/fhirService";
-import { sortData } from "../../services/fhirUtils";
+import { extractAllergyName, extractAllergyManifestation, sortData } from "../../services/fhirUtils";
 
 function Allergies({ patientId }) {
   const [allergies, setAllergies] = useState([]);
@@ -40,7 +40,15 @@ function Allergies({ patientId }) {
     }));
   };
 
-  const sortedAllergies = sortData(allergies, sortConfig.key, sortConfig.ascending);
+  const sortedAllergies = sortData(
+    allergies.map((allergy) => ({
+      ...allergy,
+      allergyName: extractAllergyName(allergy), // Extract allergy name 
+      manifestations: extractAllergyManifestation(allergy).join(", "), // Extract manifestations with severity
+    })),
+    sortConfig.key,
+    sortConfig.ascending
+  );
 
   return (
     <>
@@ -58,8 +66,9 @@ function Allergies({ patientId }) {
                 Reaction
               </th>
               <th onClick={() => handleSort("reaction[0].severity")} style={{ cursor: "pointer" }}>
-                Severity
+                Status
               </th>
+              
             </tr>
           </thead>
           <tbody>
@@ -80,9 +89,9 @@ function Allergies({ patientId }) {
                 }
               >
                 <tr style={{ cursor: "pointer" }}>
-                  <td>{allergy.code?.text || "Unknown"}</td>
-                  <td>{allergy.reaction?.[0]?.manifestation?.[0]?.text || "Unknown"}</td>
-                  <td>{allergy.reaction?.[0]?.severity || "Unknown"}</td>
+                <td>{allergy.allergyName || "Unknown"}</td>
+                <td>{allergy.manifestations}</td>
+                <td>{allergy.clinicalStatus?.text || "Unknown"}</td>
                 </tr>
               </OverlayTrigger>
             ))}

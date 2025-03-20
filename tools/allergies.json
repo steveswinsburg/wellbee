@@ -1,0 +1,371 @@
+{
+    "resourceType": "Bundle",
+    "type": "searchset",
+    "meta": {
+        "versionId": "0"
+    },
+    "total": 4,
+    "link": [
+        {
+            "relation": "first",
+            "url": "https://aucore.aidbox.beda.software/fhir/AllergyIntolerance?patient=banks-mia-leanne&page=1"
+        },
+        {
+            "relation": "self",
+            "url": "https://aucore.aidbox.beda.software/fhir/AllergyIntolerance?patient=banks-mia-leanne&page=1"
+        }
+    ],
+    "entry": [
+        {
+            "resource": {
+                "patient": {
+                    "reference": "Patient/banks-mia-leanne"
+                },
+                "clinicalStatus": {
+                    "text": "Active",
+                    "coding": [
+                        {
+                            "code": "active",
+                            "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical"
+                        }
+                    ]
+                },
+                "meta": {
+                    "profile": [
+                        "http://hl7.org.au/fhir/core/StructureDefinition/au-core-allergyintolerance"
+                    ],
+                    "lastUpdated": "2025-03-18T00:19:22.045165Z",
+                    "versionId": "1195",
+                    "extension": [
+                        {
+                            "url": "https://aidbox.app/ex/createdAt",
+                            "valueInstant": "2025-03-06T07:44:24.083525Z"
+                        }
+                    ]
+                },
+                "resourceType": "AllergyIntolerance",
+                "asserter": {
+                    "reference": "Patient/banks-mia-leanne"
+                },
+                "recordedDate": "2023-01-12",
+                "id": "chlorhexidine",
+                "recorder": {
+                    "reference": "Patient/banks-mia-leanne"
+                },
+                "code": {
+                    "text": "Chlorhexidine",
+                    "coding": [
+                        {
+                            "code": "373568007",
+                            "system": "http://snomed.info/sct"
+                        }
+                    ]
+                },
+                "onsetDateTime": "2021-01-12",
+                "reaction": [
+                    {
+                        "severity": "mild",
+                        "substance": {
+                            "text": "Chlorhexidine",
+                            "coding": [
+                                {
+                                    "code": "373568007",
+                                    "system": "http://snomed.info/sct"
+                                }
+                            ]
+                        },
+                        "manifestation": [
+                            {
+                                "text": "Hives",
+                                "coding": [
+                                    {
+                                        "code": "247472004",
+                                        "system": "http://snomed.info/sct"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            },
+            "fullUrl": "https://aucore.aidbox.beda.software/AllergyIntolerance/chlorhexidine",
+            "link": [
+                {
+                    "relation": "self",
+                    "url": "https://aucore.aidbox.beda.software/AllergyIntolerance/chlorhexidine"
+                }
+            ]
+        },
+        {
+            "resource": {
+                "patient": {
+                    "reference": "Patient/banks-mia-leanne"
+                },
+                "category": [
+                    "environment"
+                ],
+                "clinicalStatus": {
+                    "coding": [
+                        {
+                            "code": "active",
+                            "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+                            "display": "Active"
+                        }
+                    ]
+                },
+                "meta": {
+                    "profile": [
+                        "http://hl7.org.au/fhir/core/StructureDefinition/au-core-allergyintolerance"
+                    ],
+                    "lastUpdated": "2025-03-18T00:19:22.045165Z",
+                    "versionId": "1195",
+                    "extension": [
+                        {
+                            "url": "https://aidbox.app/ex/createdAt",
+                            "valueInstant": "2025-03-06T07:44:24.083525Z"
+                        }
+                    ]
+                },
+                "resourceType": "AllergyIntolerance",
+                "asserter": {
+                    "reference": "PractitionerRole/generalpractitioner-guthridge-jarred"
+                },
+                "recordedDate": "2023-05-11",
+                "id": "dust",
+                "code": {
+                    "coding": [
+                        {
+                            "code": "33008008",
+                            "system": "http://snomed.info/sct",
+                            "display": "Dust"
+                        }
+                    ]
+                },
+                "verificationStatus": {
+                    "coding": [
+                        {
+                            "code": "unconfirmed",
+                            "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+                            "display": "Unconfirmed"
+                        }
+                    ]
+                }
+            },
+            "search": {
+                "mode": "match"
+            },
+            "fullUrl": "https://aucore.aidbox.beda.software/AllergyIntolerance/dust",
+            "link": [
+                {
+                    "relation": "self",
+                    "url": "https://aucore.aidbox.beda.software/AllergyIntolerance/dust"
+                }
+            ]
+        },
+        {
+            "resource": {
+                "patient": {
+                    "reference": "Patient/banks-mia-leanne"
+                },
+                "clinicalStatus": {
+                    "text": "Active",
+                    "coding": [
+                        {
+                            "code": "active",
+                            "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical"
+                        }
+                    ]
+                },
+                "meta": {
+                    "profile": [
+                        "http://hl7.org.au/fhir/core/StructureDefinition/au-core-allergyintolerance"
+                    ],
+                    "lastUpdated": "2025-03-18T00:19:22.045165Z",
+                    "versionId": "1195",
+                    "extension": [
+                        {
+                            "url": "https://aidbox.app/ex/createdAt",
+                            "valueInstant": "2025-03-06T07:44:24.083525Z"
+                        }
+                    ]
+                },
+                "resourceType": "AllergyIntolerance",
+                "asserter": {
+                    "reference": "Patient/banks-mia-leanne"
+                },
+                "recordedDate": "2023-01-12",
+                "id": "gluten",
+                "recorder": {
+                    "reference": "Patient/banks-mia-leanne"
+                },
+                "code": {
+                    "text": "Gluten intolerance",
+                    "coding": [
+                        {
+                            "code": "1269424006",
+                            "system": "http://snomed.info/sct"
+                        }
+                    ]
+                },
+                "onsetDateTime": "1999",
+                "reaction": [
+                    {
+                        "severity": "mild",
+                        "substance": {
+                            "text": "Gluten",
+                            "coding": [
+                                {
+                                    "code": "89811004",
+                                    "system": "http://snomed.info/sct"
+                                }
+                            ]
+                        },
+                        "manifestation": [
+                            {
+                                "text": "Fatigue",
+                                "coding": [
+                                    {
+                                        "code": "84229001",
+                                        "system": "http://snomed.info/sct"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            },
+            "fullUrl": "https://aucore.aidbox.beda.software/AllergyIntolerance/gluten",
+            "link": [
+                {
+                    "relation": "self",
+                    "url": "https://aucore.aidbox.beda.software/AllergyIntolerance/gluten"
+                }
+            ]
+        },
+        {
+            "resource": {
+                "patient": {
+                    "reference": "Patient/banks-mia-leanne"
+                },
+                "category": [
+                    "food"
+                ],
+                "clinicalStatus": {
+                    "coding": [
+                        {
+                            "code": "active",
+                            "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+                            "display": "Active"
+                        }
+                    ]
+                },
+                "meta": {
+                    "profile": [
+                        "http://hl7.org.au/fhir/core/StructureDefinition/au-core-allergyintolerance"
+                    ],
+                    "lastUpdated": "2025-03-18T00:19:22.045165Z",
+                    "versionId": "1195",
+                    "extension": [
+                        {
+                            "url": "https://aidbox.app/ex/createdAt",
+                            "valueInstant": "2025-03-06T07:44:24.083525Z"
+                        }
+                    ]
+                },
+                "onsetAge": {
+                    "code": "a",
+                    "unit": "year",
+                    "value": 1,
+                    "system": "http://unitsofmeasure.org"
+                },
+                "type": "intolerance",
+                "resourceType": "AllergyIntolerance",
+                "asserter": {
+                    "reference": "PractitionerRole/generalpractitioner-guthridge-jarred"
+                },
+                "recordedDate": "2023-03-14",
+                "id": "lactose",
+                "recorder": {
+                    "reference": "PractitionerRole/generalpractitioner-guthridge-jarred"
+                },
+                "code": {
+                    "coding": [
+                        {
+                            "code": "782415009",
+                            "system": "http://snomed.info/sct",
+                            "display": "Intolerance to lactose"
+                        }
+                    ]
+                },
+                "verificationStatus": {
+                    "coding": [
+                        {
+                            "code": "confirmed",
+                            "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification",
+                            "display": "Confirmed"
+                        }
+                    ]
+                },
+                "reaction": [
+                    {
+                        "severity": "moderate",
+                        "substance": {
+                            "coding": [
+                                {
+                                    "code": "47703008",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Lactose"
+                                }
+                            ]
+                        },
+                        "manifestation": [
+                            {
+                                "coding": [
+                                    {
+                                        "code": "21522001",
+                                        "system": "http://snomed.info/sct",
+                                        "display": "Abdominal pain"
+                                    }
+                                ]
+                            },
+                            {
+                                "coding": [
+                                    {
+                                        "code": "116289008",
+                                        "system": "http://snomed.info/sct",
+                                        "display": "Abdominal bloating"
+                                    }
+                                ]
+                            },
+                            {
+                                "coding": [
+                                    {
+                                        "code": "62315008",
+                                        "system": "http://snomed.info/sct",
+                                        "display": "Diarrhoea"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "search": {
+                "mode": "match"
+            },
+            "fullUrl": "https://aucore.aidbox.beda.software/AllergyIntolerance/lactose",
+            "link": [
+                {
+                    "relation": "self",
+                    "url": "https://aucore.aidbox.beda.software/AllergyIntolerance/lactose"
+                }
+            ]
+        }
+    ]
+}

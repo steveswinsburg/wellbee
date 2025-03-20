@@ -1,0 +1,284 @@
+{
+    "resourceType": "Bundle",
+    "type": "searchset",
+    "meta": {
+        "versionId": "0"
+    },
+    "total": 4,
+    "link": [
+        {
+            "relation": "first",
+            "url": "https://aucore.aidbox.beda.software/fhir/MedicationStatement?patient=banks-mia-leanne&page=1"
+        },
+        {
+            "relation": "self",
+            "url": "https://aucore.aidbox.beda.software/fhir/MedicationStatement?patient=banks-mia-leanne&page=1"
+        }
+    ],
+    "entry": [
+        {
+            "resource": {
+                "meta": {
+                    "profile": [
+                        "http://hl7.org.au/fhir/core/StructureDefinition/au-core-medicationstatement"
+                    ],
+                    "lastUpdated": "2025-03-18T00:19:22.051334Z",
+                    "versionId": "1197",
+                    "extension": [
+                        {
+                            "url": "https://aidbox.app/ex/createdAt",
+                            "valueInstant": "2025-03-15T22:58:59.384348Z"
+                        }
+                    ]
+                },
+                "dosage": [
+                    {
+                        "text": "1/2 tablet in the morning"
+                    }
+                ],
+                "resourceType": "MedicationStatement",
+                "contained": [
+                    {
+                        "id": "bisoprolol",
+                        "code": {
+                            "text": "Bisoprolol 2.5mg tab",
+                            "coding": [
+                                {
+                                    "code": "23281011000036106",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Bisoprolol fumarate 2.5 mg tablet"
+                                }
+                            ]
+                        },
+                        "resourceType": "Medication"
+                    }
+                ],
+                "status": "active",
+                "id": "active-bisoprolol",
+                "dateAsserted": "2019-02-05",
+                "medicationReference": {
+                    "reference": "#bisoprolol"
+                },
+                "subject": {
+                    "reference": "Patient/banks-mia-leanne"
+                }
+            },
+            "search": {
+                "mode": "match"
+            },
+            "fullUrl": "https://aucore.aidbox.beda.software/MedicationStatement/active-bisoprolol",
+            "link": [
+                {
+                    "relation": "self",
+                    "url": "https://aucore.aidbox.beda.software/MedicationStatement/active-bisoprolol"
+                }
+            ]
+        },
+        {
+            "resource": {
+                "meta": {
+                    "profile": [
+                        "http://hl7.org.au/fhir/core/StructureDefinition/au-core-medicationstatement"
+                    ],
+                    "lastUpdated": "2025-03-18T00:19:22.051334Z",
+                    "versionId": "1197",
+                    "extension": [
+                        {
+                            "url": "https://aidbox.app/ex/createdAt",
+                            "valueInstant": "2025-03-15T22:58:59.384348Z"
+                        }
+                    ]
+                },
+                "medicationCodeableConcept": {
+                    "text": "Bactrim DS - tablet",
+                    "coding": [
+                        {
+                            "code": "6632011000036102",
+                            "system": "http://snomed.info/sct",
+                            "display": "Bactrim DS tablet"
+                        },
+                        {
+                            "code": "2951H",
+                            "system": "http://pbs.gov.au/code/item"
+                        }
+                    ]
+                },
+                "resourceType": "MedicationStatement",
+                "status": "completed",
+                "id": "completed-bactrim",
+                "dateAsserted": "2020-05-30T10:00:00+10:00",
+                "subject": {
+                    "reference": "Patient/banks-mia-leanne"
+                },
+                "reasonReference": [
+                    {
+                        "reference": "Condition/uti"
+                    }
+                ],
+                "text": {
+                    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: MedicationStatement completed-bactrim</b></p><a name=\"completed-bactrim\"> </a><a name=\"hccompleted-bactrim\"> </a><a name=\"completed-bactrim-en-AU\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\"/><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-au-core-medicationstatement.html\">AU Core MedicationStatement</a></p></div><p><b>status</b>: Completed</p><p><b>medication</b>: <span title=\"Codes:{http://snomed.info/sct 6632011000036102}, {http://pbs.gov.au/code/item 2951H}\">Bactrim DS - tablet</span></p><p><b>subject</b>: <a href=\"Patient-banks-mia-leanne.html\">Mia Leanne Banks  Female, DoB: 1983-08-25 ( IHI: Austalian Healthcare Identifier - Individual#8003608333647261)</a></p><p><b>dateAsserted</b>: 2020-05-30 10:00:00+1000</p><p><b>reasonReference</b>: <a href=\"Condition-uti.html\">Condition Urinary tract infection</a></p></div>",
+                    "status": "generated"
+                }
+            },
+            "search": {
+                "mode": "match"
+            },
+            "fullUrl": "https://aucore.aidbox.beda.software/MedicationStatement/completed-bactrim",
+            "link": [
+                {
+                    "relation": "self",
+                    "url": "https://aucore.aidbox.beda.software/MedicationStatement/completed-bactrim"
+                }
+            ]
+        },
+        {
+            "resource": {
+                "meta": {
+                    "profile": [
+                        "http://hl7.org.au/fhir/core/StructureDefinition/au-core-medicationstatement"
+                    ],
+                    "lastUpdated": "2025-03-18T00:19:22.051334Z",
+                    "versionId": "1197",
+                    "extension": [
+                        {
+                            "url": "https://aidbox.app/ex/createdAt",
+                            "valueInstant": "2025-03-15T22:58:59.384348Z"
+                        }
+                    ]
+                },
+                "reasonCode": [
+                    {
+                        "text": "Adult gonococcal conjunctivitis",
+                        "coding": [
+                            {
+                                "code": "719755001",
+                                "system": "http://snomed.info/sct"
+                            }
+                        ]
+                    }
+                ],
+                "medicationCodeableConcept": {
+                    "text": "Chloramphenicol 1% eye ointment",
+                    "coding": [
+                        {
+                            "code": "22717011000036101",
+                            "system": "http://snomed.info/sct",
+                            "display": "Chloramphenicol 1% eye ointment"
+                        }
+                    ]
+                },
+                "resourceType": "MedicationStatement",
+                "status": "completed",
+                "id": "completed-chloramphenicol",
+                "dateAsserted": "2019-02-05",
+                "subject": {
+                    "reference": "Patient/banks-mia-leanne"
+                }
+            },
+            "search": {
+                "mode": "match"
+            },
+            "fullUrl": "https://aucore.aidbox.beda.software/MedicationStatement/completed-chloramphenicol",
+            "link": [
+                {
+                    "relation": "self",
+                    "url": "https://aucore.aidbox.beda.software/MedicationStatement/completed-chloramphenicol"
+                }
+            ]
+        },
+        {
+            "resource": {
+                "meta": {
+                    "profile": [
+                        "http://hl7.org.au/fhir/core/StructureDefinition/au-core-medicationstatement"
+                    ],
+                    "lastUpdated": "2025-03-18T00:19:22.051334Z",
+                    "versionId": "1197",
+                    "extension": [
+                        {
+                            "url": "https://aidbox.app/ex/createdAt",
+                            "valueInstant": "2025-03-15T22:58:59.384348Z"
+                        }
+                    ]
+                },
+                "dosage": [
+                    {
+                        "text": "Every 1-10 days at 10am for 30 minutes",
+                        "route": {
+                            "coding": [
+                                {
+                                    "code": "47625008",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Intravenous route"
+                                }
+                            ]
+                        },
+                        "timing": {
+                            "repeat": {
+                                "period": 1,
+                                "duration": 30,
+                                "frequency": 1,
+                                "periodMax": 10,
+                                "timeOfDay": [
+                                    "10:00:00"
+                                ],
+                                "periodUnit": "d",
+                                "durationUnit": "min"
+                            }
+                        },
+                        "doseAndRate": [
+                            {
+                                "doseQuantity": {
+                                    "code": "mg",
+                                    "unit": "mg",
+                                    "value": 200,
+                                    "system": "http://unitsofmeasure.org"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "medicationCodeableConcept": {
+                    "coding": [
+                        {
+                            "code": "5232011000036102",
+                            "system": "http://snomed.info/sct",
+                            "display": "Diflucan 200 mg/100 mL injection, 100 mL vial",
+                            "extension": [
+                                {
+                                    "url": "http://hl7.org.au/fhir/StructureDefinition/medication-type",
+                                    "valueCoding": {
+                                        "code": "BPDSF",
+                                        "system": "http://terminology.hl7.org.au/CodeSystem/medication-type",
+                                        "display": "Branded product with strengths and form"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "resourceType": "MedicationStatement",
+                "status": "completed",
+                "id": "previous-use-diflucan",
+                "dateAsserted": "2018-07-10",
+                "subject": {
+                    "reference": "Patient/banks-mia-leanne"
+                },
+                "effectivePeriod": {
+                    "end": "2018-07-05",
+                    "start": "2018-06-25"
+                }
+            },
+            "search": {
+                "mode": "match"
+            },
+            "fullUrl": "https://aucore.aidbox.beda.software/MedicationStatement/previous-use-diflucan",
+            "link": [
+                {
+                    "relation": "self",
+                    "url": "https://aucore.aidbox.beda.software/MedicationStatement/previous-use-diflucan"
+                }
+            ]
+        }
+    ]
+}

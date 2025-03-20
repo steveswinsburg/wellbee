@@ -132,4 +132,38 @@ export const extractMedicationName = (medicationResource) => {
     }
   
     return "Unknown";
+};
+
+export const extractAllergyName = (allergyResource) => {
+    if (!allergyResource) return "Unknown";
+  
+    // Case 1: If allergy has a direct text name
+    if (allergyResource.code?.text) {
+      return allergyResource.code.text;
+    }
+  
+    // Case 2: If allergy has coding[].display
+    if (allergyResource.code?.coding?.length > 0) {
+      const codingDisplay = allergyResource.code.coding.find(
+        (coding) => coding.display
+      )?.display;
+      if (codingDisplay) return codingDisplay;
+    }
+  
+    return "Unknown";
+  };
+
+
+
+ export const extractAllergyManifestation = (allergyResource) => {
+    if (!allergyResource || !allergyResource.reaction) return ["Unknown"];
+  
+    return allergyResource.reaction.flatMap(reaction => {
+      const severity = reaction.severity ? `(${reaction.severity})` : ""; 
+      return reaction.manifestation?.flatMap(manifest =>
+        manifest.text
+          ? `${manifest.text} ${severity}`.trim()
+          : manifest.coding?.map(coding => `${coding.display} ${severity}`.trim()).filter(Boolean)
+      ) || ["Unknown"];
+    });
   };

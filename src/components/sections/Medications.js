@@ -64,8 +64,8 @@ function Medications({ patientId }) {
               <th onClick={() => handleSort("status")} style={{ cursor: "pointer" }}>
                 Status
               </th>
-              <th onClick={() => handleSort("resourceType")} style={{ cursor: "pointer" }}>
-                Type
+              <th onClick={() => handleSort("dateAsserted")} style={{ cursor: "pointer" }}>
+                Date
               </th>
             </tr>
           </thead>
@@ -89,7 +89,7 @@ function Medications({ patientId }) {
                 <tr style={{ cursor: "pointer" }}>
                   <td>{med.medicationName || "Unknown"}</td>
                   <td>{med.status || "Unknown"}</td>
-                  <td>{med.resourceType}</td>
+                  <td>{med.dateAsserted}</td>
                 </tr>
               </OverlayTrigger>
             ))}
