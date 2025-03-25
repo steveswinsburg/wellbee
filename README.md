@@ -1,6 +1,8 @@
 # wellbee
 
-A FHIR enabled patient wellness app
+A FHIR enabled patient wellness app.
+
+I wrote this in one day at the HL7 Connectathon in Sydney, March 2025.
 
 ## Running locally
 ```
